@@ -54,7 +54,13 @@ Cointegration p-value: 0.0008 (full sample), 0.018 (train only) — both comfort
 
 ## Other pairs tested
 
-Screened via `pair_screener.py`: PFE/MRK, JPM/BAC, XOM/CVX, V/MA, HD/LOW. Only V/MA passed cointegration on both the full sample and the train-only window. KO/PEP (tested separately, not same-sector-screened) passed on the train window (p=0.026) but failed on the full sample (p=0.107) and showed a clear structural breakdown post-2020 — a useful negative result, included in the project history rather than hidden.
+12 same-sector candidate pairs were screened in total via `pair_screener.py`: PFE/MRK, JPM/BAC, XOM/CVX, V/MA, HD/LOW, WMT/TGT, UNH/CI, GS/MS, C/WFC, MCD/YUM, UPS/FDX, T/VZ. **Only V/MA passed cointegration on both the full sample and the train-only window.** This 1-in-12 pass rate is reported deliberately rather than treated as a shortfall: the search was stopped here rather than widened further, since continuing to screen pairs until a second one passes would itself become a form of overfitting — at a 5% significance threshold, roughly 1 in 20 *unrelated* pairs would be expected to pass by chance alone, so hunting for more "winners" risks manufacturing a false positive rather than finding a real one.
+
+Two instructive negative results came out of this search:
+- **KO/PEP** (tested separately, not part of the 12-pair screen): passed on the train window (p=0.026) but failed on the full sample (p=0.107), with a clear structural breakdown in the relationship visible post-2020.
+- **MCD/YUM**: the mirror case — passed on the full sample (p=0.028) but failed on the train-only window (p=0.124), meaning the relationship wasn't reliably present during the earlier period used for fitting.
+
+Both are left in the project history rather than hidden, since the negative results are part of demonstrating the methodology works, not just the one pair that happened to pass.
 
 ## Running it
 
@@ -67,5 +73,5 @@ python pair_screener.py # screens additional candidate pairs
 ## Known limitations / next steps
 
 - Execution is close-to-close; a more realistic version would execute at the next day's open.
-- Only one pair is backtested in depth; a more thorough version would validate this same pipeline across several cointegrated pairs.
+- Only one pair (V/MA) ended up cointegrated across 12 screened candidates; a larger-scale version would screen across more sectors and more pair combinations to find additional validated pairs, ideally testing a pre-registered list rather than searching reactively.
 - No portfolio-level position sizing or risk limits — this is a single-pair signal study, not a full trading system.

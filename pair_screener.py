@@ -15,11 +15,13 @@ from pair_selection import test_cointegration, compute_hedge_ratio
 from train_test_evaluation import split_train_test
 
 CANDIDATE_PAIRS = [
-    ("PFE", "MRK"),   # pharma
-    ("JPM", "BAC"),   # banks
-    ("XOM", "CVX"),   # oil majors
-    ("V", "MA"),      # payments
-    ("HD", "LOW"),    # home improvement retail
+    ("WMT", "TGT"),   # big-box retail
+    ("UNH", "CI"),    # health insurers
+    ("GS", "MS"),     # investment banks
+    ("C", "WFC"),     # banks (different pair from the JPM/BAC that already failed)
+    ("MCD", "YUM"),   # fast food
+    ("UPS", "FDX"),   # logistics/shipping
+    ("T", "VZ"),      # telecom
 ]
 
 START = "2015-01-01"
